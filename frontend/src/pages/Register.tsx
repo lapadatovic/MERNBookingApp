@@ -1,6 +1,8 @@
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 import * as apiClient from '../api-clients'
+import { useAppContext } from "../context/AppContext";
+import { useNavigate } from "react-router-dom";
 
 
 export type RegisterFormData = {
@@ -11,13 +13,13 @@ export type RegisterFormData = {
     confirmPassword: string,
 }
 
-const Register = () => {
 
+const Register = () => {
+    const navigate = useNavigate();
+    const { showToast } = useAppContext();
     /*
         register ->  allows you to register an input or select element and apply validation rules to React Hook Form
-
         watch -> method will watch specified inputs and return their values
-
         handleSubmit -> This function will receive the form data if form validation is successful.
     */
     const { register, watch, handleSubmit, formState:{errors} } = useForm<RegisterFormData>();
@@ -25,10 +27,17 @@ const Register = () => {
     // Create mutation or create 
     const mutation = useMutation(apiClient.register, {
         onSuccess: ()=>{
-            console.log('registration succes!');
+            showToast({
+                message: "Registration Success",
+                type: "SUCCESS"
+            })
+            navigate('/');
         },
         onError: (error: Error) => {
-            console.log(error.message);
+           showToast({
+                message: error.message,
+                type: "ERROR"
+           })
         }
     });
 
