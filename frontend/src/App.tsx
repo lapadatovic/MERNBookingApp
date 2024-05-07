@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 
 import Layout from "./layouts/Layout"
-import { Register } from "./pages";
+import { Register,SignIn } from "./pages";
 
 function App() {
 
@@ -34,6 +34,14 @@ function App() {
               <Register/> 
             </Layout>}
         />
+        <Route 
+          path="/sign-in"
+          element= { 
+            <Layout> 
+              <SignIn/> 
+            </Layout>}
+        />
+
         <Route path="/search" element={<></>} />
         <Route path="*" element={<Navigate to='/'/>} />
       </Routes>
