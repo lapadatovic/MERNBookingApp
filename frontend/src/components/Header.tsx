@@ -28,11 +28,6 @@ const Header = () => {
                                     My Hotels
                                 </Link>
                                 <SignOutButton />
-                                <button
-                                    className=''
-                                >
-                                    HOTELS BUTTON
-                                </button>
                             </>
                         )
                         : ( <Link 
