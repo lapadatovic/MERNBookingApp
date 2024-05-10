@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 import userRoutes from './routes/users'
 import authRoutes from './routes/auth';
 import cookieParser from 'cookie-parser'
+import path from 'path';
 
 
 // connect to DB
@@ -25,9 +26,11 @@ app.use(cors({
 //     res.json({message: "Hello from express endpoint"});
 // });
 
+app.use(express.static(path.join(__dirname, "../../frontend/dist")));
+
 app.use('/api/users', userRoutes)
 app.use('/api/auth', authRoutes);
 
-app.listen(3500, () => {
-    console.log("Server running at PORT:3500")
+app.listen(7000, () => {
+    console.log("Server running at PORT:7000")
 })
