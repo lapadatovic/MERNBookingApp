@@ -5,7 +5,7 @@ const DetailsSection = () => {
 
     const { 
         register, 
-        formState:{errors} 
+        formState: {errors} 
     } = useFormContext<HotelFormData>();
     return (
         <div className=" flex flex-col gap-4 ">
@@ -105,7 +105,7 @@ const DetailsSection = () => {
                             Select as Rating
                         </option>
                         {[1,2,3,4,5].map((rate) => (
-                            <option value={rate}>{rate}</option>
+                            <option key={rate} value={rate}>{rate}</option>
                         ))}
                     </select>
                     {

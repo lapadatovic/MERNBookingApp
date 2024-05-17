@@ -1,5 +1,9 @@
 import { FormProvider, useForm } from "react-hook-form";
 import DetailsSection from "./DetailsSection";
+import TypeSection from "./TypeSection";
+import FacilitiesSection from "./FacilitySection";
+import GuestsSection from "./GuestSection";
+import ImagesSection from "./ImagesSection";
 
 export type HotelFormData = {
     name: string,
@@ -15,15 +19,65 @@ export type HotelFormData = {
     childCount: number;
 }
 
+type Props = {
+    onSave: (hotelFormData: FormData) => void;
+    isLoading: boolean;
+}
 
-
-const ManageHotelForm = () => {
+const ManageHotelForm = ({onSave, isLoading}: Props) => {
+    
     const formMethods = useForm<HotelFormData>();
+    const { handleSubmit } = formMethods;
+
+    const onSubmit = handleSubmit((formDataJson: HotelFormData) => {
+        // create new FormData and call API
+        // console.log(formDataJson);
+
+        const formData = new FormData();
+        formData.append('name', formDataJson.name);
+        formData.append('city', formDataJson.city);
+        formData.append('country', formDataJson.country);
+        formData.append('description', formDataJson.description);
+        formData.append('type', formDataJson.type);
+        formData.append('pricePerNight', formDataJson.pricePerNight.toString());
+        formData.append('starRating', formDataJson.starRating.toString());
+        formData.append('adultCount', formDataJson.adultCount.toString());
+        formData.append('childCount', formDataJson.childCount.toString());
+        
+        // we can have more facilities so we need to loop through all 
+        formDataJson.facilities.forEach((facility,index) => {
+            formData.append(`facilities[${index}]`, facility);
+        })
+
+        // we need to convert imagefiles to Array bcz imageFile is of type FileList
+        // and FileList type do not allow us to use forEach
+        Array.from(formDataJson.imageFiles).forEach((imageFile) => {
+            formData.append(`imageFiles`, imageFile );
+        });
+
+        // calling onSave
+        onSave(formData);
+    });
     
     return(
         <FormProvider {...formMethods}>
-            <form>
+            <form className="flex flex-col gap-10" onSubmit={onSubmit}>
                 <DetailsSection />
+                <TypeSection />
+                <FacilitiesSection />
+                <GuestsSection />
+                <ImagesSection />
+                <span className="flex justify-end">
+                    <button 
+                        //disabled -> User cannot click re-click save until data is saving
+                        // prevent to create copies of data
+                        disabled={isLoading}
+                        type="submit"
+                        className="bg-blue-600 p-2 font-bold rounded text-white hover:bg-blue-500 text-xl disabled:bg-gray-500"
+                    >
+                       {isLoading ? "Saving... " : "Save"}
+                    </button>
+                </span>
             </form>
         </FormProvider>
     )
