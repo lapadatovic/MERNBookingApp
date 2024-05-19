@@ -11,7 +11,7 @@ import { useAppContext } from "./context/AppContext";
 
 function App() {
 
- const isLoggedIn = useAppContext();
+ const { isLoggedIn } = useAppContext();
 
   return (
     <Router>
@@ -51,7 +51,8 @@ function App() {
               path="/add-hotel"
               element= {<Layout> <AddHotel/> </Layout>}
             />
-          </>)
+          </>
+          )
         }
         <Route path="/search" element={<></>} />
         <Route path="*" element={<Navigate to='/'/>} />
