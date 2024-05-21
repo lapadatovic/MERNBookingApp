@@ -1,19 +1,19 @@
 import express, { Request, Response } from 'express';
-import {validationResult,check, body} from 'express-validator'
+import { body } from 'express-validator'
 import multer from 'multer'
 const router = express.Router();
 import cloudinary from 'cloudinary';
 import Hotel, { HotelType } from '../models/hotel';
 import verifyToken from '../middleware/auth';
 
-const storage = multer.memoryStorage()
+const storage = multer.memoryStorage();
 const upload = multer({
     storage : storage,
     limits: {
         fileSize: 5 * 1024 * 1024 //5MB,
 
     }
-})
+});
 
 // api/my-hotels
 router.post('/my-hotels', 
@@ -42,7 +42,7 @@ router.post('/my-hotels',
                 // convert img to base64 string, so it can be processed by Cloudinary
                 const b64 = Buffer.from(image.buffer).toString('base64');
                 let dataURI = "data:"+image.mimetype + ";base64," + b64;
-
+                
                 const res = await cloudinary.v2.uploader.upload(dataURI);
 
                 return res.url;
@@ -68,5 +68,16 @@ router.post('/my-hotels',
             res.status(500).json({message: "Something went wrong"});
         }
 });
+
+
+router.get('/all-hotels', verifyToken, async (req:Request, res: Response) => {
+    try {
+        const hotels = await Hotel.find({ userId: req.userId});
+
+        res.json(hotels);
+    } catch (error) {
+        res.status(500).json({message: "Error fetching hotels"})
+    }
+})
 
 export default router;

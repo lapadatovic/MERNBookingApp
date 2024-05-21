@@ -31,7 +31,6 @@ const ManageHotelForm = ({onSave, isLoading}: Props) => {
 
     const onSubmit = handleSubmit((formDataJson: HotelFormData) => {
         // create new FormData and call API
-        // console.log(formDataJson);
 
         const formData = new FormData();
         formData.append('name', formDataJson.name);
@@ -61,7 +60,10 @@ const ManageHotelForm = ({onSave, isLoading}: Props) => {
     
     return(
         <FormProvider {...formMethods}>
-            <form className="flex flex-col gap-10" onSubmit={onSubmit}>
+            <form 
+                className="flex flex-col gap-10" 
+                onSubmit={onSubmit}
+            >
                 <DetailsSection />
                 <TypeSection />
                 <FacilitiesSection />
@@ -69,7 +71,7 @@ const ManageHotelForm = ({onSave, isLoading}: Props) => {
                 <ImagesSection />
                 <span className="flex justify-end">
                     <button 
-                        //disabled -> User cannot click re-click save until data is saving
+                        //disabled -> User cannot re-click save until data is saving
                         // prevent to create copies of data
                         disabled={isLoading}
                         type="submit"
