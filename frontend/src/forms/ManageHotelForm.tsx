@@ -4,6 +4,8 @@ import TypeSection from "./TypeSection";
 import FacilitiesSection from "./FacilitySection";
 import GuestsSection from "./GuestSection";
 import ImagesSection from "./ImagesSection";
+import { HotelType } from "../../../backend/src/shared/types";
+import { useEffect } from "react";
 
 export type HotelFormData = {
     name: string,
@@ -17,22 +19,32 @@ export type HotelFormData = {
     imageFiles: FileList;
     adultCount: number;
     childCount: number;
+    imageUrls: string[];
 }
 
 type Props = {
     onSave: (hotelFormData: FormData) => void;
     isLoading: boolean;
+    // we make hotel optional cuz we need it only in EditHotel
+    hotel?: HotelType,
 }
 
-const ManageHotelForm = ({onSave, isLoading}: Props) => {
+const ManageHotelForm = ({onSave, isLoading, hotel }: Props) => {
     
     const formMethods = useForm<HotelFormData>();
-    const { handleSubmit } = formMethods;
+    const { handleSubmit, reset } = formMethods;
+
+    useEffect(() => {
+        reset(hotel);
+    }, [hotel, reset])
 
     const onSubmit = handleSubmit((formDataJson: HotelFormData) => {
         // create new FormData and call API
 
         const formData = new FormData();
+        if(hotel){ 
+            formData.append('hotelId', hotel._id);
+        }
         formData.append('name', formDataJson.name);
         formData.append('city', formDataJson.city);
         formData.append('country', formDataJson.country);
@@ -47,6 +59,15 @@ const ManageHotelForm = ({onSave, isLoading}: Props) => {
         formDataJson.facilities.forEach((facility,index) => {
             formData.append(`facilities[${index}]`, facility);
         })
+
+        // [imag1.jpg, image2.jpg, image3.jpg]
+        // and delete image2, image 3
+        // imageUrls = [image1.jpg]
+        if(formDataJson.imageUrls) {
+            formDataJson.imageUrls.forEach((url, index) => {
+                formData.append(`imageUrls[${index}]`, url);
+            })
+        }
 
         // we need to convert imagefiles to Array bcz imageFile is of type FileList
         // and FileList type do not allow us to use forEach

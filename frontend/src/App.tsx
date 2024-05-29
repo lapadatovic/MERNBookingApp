@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 
 import Layout from "./layouts/Layout"
-import { AddHotel, Register,SignIn, MyHotels } from "./pages";
+import { AddHotel, Register,SignIn, MyHotels, EditHotel } from "./pages";
 import { useAppContext } from "./context/AppContext";
 
 function App() {
@@ -49,13 +49,23 @@ function App() {
           <>
             <Route 
               path="/add-hotel"
-              element= {<Layout> <AddHotel/> </Layout>}
+              element= {
+              <Layout> 
+                <AddHotel/> 
+              </Layout>}
             />
             <Route 
               path="/my-hotels"
               element= { 
               <Layout> 
                 <MyHotels/> 
+              </Layout>}
+            />
+            <Route 
+              path="/edit-hotel/:hotelId"
+              element= { 
+              <Layout> 
+                <EditHotel/> 
               </Layout>}
             />
           </>
