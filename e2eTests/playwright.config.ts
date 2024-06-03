@@ -38,7 +38,7 @@ export default defineConfig({
       name: 'chromium',
       use: { ...devices['Desktop Chrome'],
       launchOptions: {
-        slowMo: 500,
+        slowMo: 1000,
         }
       },
     },
