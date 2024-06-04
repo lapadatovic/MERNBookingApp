@@ -3,10 +3,12 @@ import SignIn from "./SignIn";
 import AddHotel from "./AddHotel";
 import MyHotels from "./MyHotels";
 import EditHotel from "./EditHotel";
+import Search from "./Search";
 export {
     Register,
     SignIn,
     AddHotel,
     MyHotels,
-    EditHotel
+    EditHotel,
+    Search,
 }
