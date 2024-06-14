@@ -21,7 +21,13 @@ const SearchBar = () => {
 
     const handleSubmit = (event: FormEvent) => {
         event.preventDefault();
-        search.saveSearchValues(destination, checkIn, checkOut, adultCount, childCount);
+        search.saveSearchValues(
+            destination, 
+            checkIn, 
+            checkOut, 
+            adultCount, 
+            childCount
+        );
         navigate('/search')
     };
 
@@ -65,6 +71,7 @@ const SearchBar = () => {
                     />
                 </label>
             </div>
+
             <div className="flex flex-row items-center flex-1 bg-white p-2">
                 <DatePicker 
                     selected={checkIn} 
@@ -79,11 +86,12 @@ const SearchBar = () => {
                     wrapperClassName="min-w-full"
                 />
             </div>
+
             <div className="flex flex-row items-center flex-1 bg-white p-2">
                 <DatePicker 
                     selected={checkOut} 
                     onChange={(date) => setCheckOut(date as Date)} 
-                    selectsStart 
+                    selectsEnd
                     startDate={checkIn} 
                     endDate={checkOut}
                     minDate={minDate}
@@ -93,6 +101,7 @@ const SearchBar = () => {
                     wrapperClassName="min-w-full"
                 />
             </div>
+
             <div className="flex gap-1">
                 <button 
                     className="w-2/3 bg-blue-600 text-white h-full p-2 font-bold text-xl hover:bg-blue-500">
@@ -101,7 +110,6 @@ const SearchBar = () => {
                 <button className="w-1/3 bg-red-600 text-white h-full p-2 font-bold text-xl hover:bg-red-700">
                     Clear
                 </button>
-               
             </div>
         </form>
     )
