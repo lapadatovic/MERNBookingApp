@@ -4,7 +4,6 @@ import * as apiClient from '../api-clients'
 import { useAppContext } from "../context/AppContext";
 import { useNavigate } from "react-router-dom";
 
-
 export type RegisterFormData = {
     firstName: string,
     lastName: string,

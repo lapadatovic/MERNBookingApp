@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 
 import Layout from "./layouts/Layout"
-import { AddHotel, Register,SignIn, MyHotels, EditHotel } from "./pages";
+import { AddHotel, Register,SignIn, MyHotels, EditHotel, Search} from "./pages";
 import { useAppContext } from "./context/AppContext";
 
 function App() {
@@ -23,12 +23,12 @@ function App() {
             </Layout>
           } 
         />
-        <Route path="/" 
-          element={
-            <Layout> 
-              <p>Search Page</p>
-            </Layout>
-          } 
+        <Route
+           path="/search" 
+           element={
+           <Layout>
+              <Search />
+           </Layout>} 
         />
         <Route 
           path="/register"
@@ -44,7 +44,7 @@ function App() {
               <SignIn/> 
             </Layout>}
         />
-        {/* Protected routs, we cannont acces if we are not logged in */}
+        {/* Protected routs, we cannont access if we are not logged in */}
         {isLoggedIn && (
           <>
             <Route 
@@ -71,8 +71,6 @@ function App() {
           </>
           )
         }
-
-        <Route path="/search" element={<></>} />
         <Route path="*" element={<Navigate to='/'/>} />
       </Routes>
     </Router>
