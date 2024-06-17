@@ -15,6 +15,7 @@ const SearchBar = () => {
     const [checkOut, setCheckOut] = useState<Date>(search.checkOut);
     const [adultCount, setAdultCount] = useState<number>(search.adultCount);
     const [childCount, setChildCount] = useState<number>(search.childCount);
+
     const minDate = new Date();
     const maxDate = new Date();
     maxDate.setFullYear(maxDate.getFullYear() + 1);
@@ -26,7 +27,7 @@ const SearchBar = () => {
             checkIn, 
             checkOut, 
             adultCount, 
-            childCount
+            childCount,
         );
         navigate('/search')
     };
