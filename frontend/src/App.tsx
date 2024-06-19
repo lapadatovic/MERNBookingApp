@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 
 import Layout from "./layouts/Layout"
-import { AddHotel, Register,SignIn, MyHotels, EditHotel, Search} from "./pages";
+import { AddHotel, Register,SignIn, MyHotels, EditHotel, Search, Detail} from "./pages";
 import { useAppContext } from "./context/AppContext";
 
 function App() {
@@ -42,6 +42,13 @@ function App() {
           element= { 
             <Layout> 
               <SignIn/> 
+            </Layout>}
+        />
+        <Route 
+          path="/detail/:hotelId"
+          element= { 
+            <Layout> 
+              <Detail/> 
             </Layout>}
         />
         {/* Protected routs, we cannont access if we are not logged in */}

@@ -109,7 +109,8 @@ export const updateMyHotelById = async (hotelFormData: FormData) => {
     };
 
     return response.json();
-}   
+}
+
 
 export type SearchParams = {
     // we declared all string because when we call query, 
@@ -150,6 +151,16 @@ export const searchHotels = async (searchParams: SearchParams): Promise<HotelSea
 
     if(!response.ok){
         throw new Error('Error fetching hotels');
+    }
+
+    return response.json();
+}
+
+export const fetchHotelById = async (hotelId: string): Promise<HotelType>=> {
+    const response = await fetch(`${API_BASE_URL}/api/hotels/${hotelId}`);
+
+    if(!response.ok){
+       throw new Error('Somethig went wrong');
     }
 
     return response.json();
