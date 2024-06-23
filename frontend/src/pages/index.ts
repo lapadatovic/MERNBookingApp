@@ -5,6 +5,7 @@ import MyHotels from "./MyHotels";
 import EditHotel from "./EditHotel";
 import Search from "./Search";
 import Detail from "./Detail";
+import Booking from "./Booking";
 export {
     Register,
     SignIn,
@@ -13,4 +14,5 @@ export {
     EditHotel,
     Search,
     Detail,
+    Booking,
 }

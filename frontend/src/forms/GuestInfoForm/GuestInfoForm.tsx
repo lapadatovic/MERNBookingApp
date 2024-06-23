@@ -48,7 +48,7 @@ const GuestInfoForm = ({hotelId, pricePerNight}: Props) => {
     const onSubmit = (data: GuestInfoFormData) => {
         // for destination we are sending "",  but for other we are taking from 'data'
         search.saveSearchValues("", data.checkIn, data.checkOut, data.adultCount, data.childCount);
-        navigate(`/hotel/${hotelId}/booking}`);
+        navigate(`/hotel/${hotelId}/booking`);
     }
 
 

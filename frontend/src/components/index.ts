@@ -10,6 +10,7 @@ import StarRatingFilter from "./StarRatingFilter"
 import HotelTypesFilter from "./HotelTypesFilter"
 import FacilitiesFilter from './FacilitiesFilter'
 import PriceFilter from "./PriceFilter"
+import BookingDetailsSummary from "./BookingDetailsSummary"
 
 export { 
     Header,
@@ -23,5 +24,6 @@ export {
     StarRatingFilter,
     HotelTypesFilter,
     FacilitiesFilter,
-    PriceFilter
+    PriceFilter,
+    BookingDetailsSummary
 }

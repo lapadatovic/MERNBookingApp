@@ -15,8 +15,6 @@ const Detail = () => {
         return <>No hotel</>
     }
 
-    console.log(hotel);
-
     return (
         <div className="space-y-6 ">
             {/* Stars & Hotel name div */}
